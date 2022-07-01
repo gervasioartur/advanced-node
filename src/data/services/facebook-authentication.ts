@@ -4,11 +4,11 @@ import { LoadFacebookUserApi } from '@/data/contracts/apis'
 
 export class FacebookAuthenticationService {
   constructor (
-    private readonly loadFacebookUserByTokenApi: LoadFacebookUserApi
+    private readonly loadFacebookUser: LoadFacebookUserApi
   ) {}
 
   async perfom (params: FacebookAuthentication.Params): Promise<AuthenticationError> {
-    await this.loadFacebookUserByTokenApi.loadUser(params)
+    await this.loadFacebookUser.loadUser(params)
     return new AuthenticationError()
   }
 }

@@ -3,9 +3,11 @@ import { LoadFacebookUserApi } from '@/data/contracts/apis'
 import { FacebookAuthenticationService } from '@/data/services'
 class LoadFacebookUserSpy implements LoadFacebookUserApi {
   token?: string
+  callsCount = 0
   result = undefined
   async loadUser (params: LoadFacebookUserApi.Params): Promise<LoadFacebookUserApi.Result> {
     this.token = params.token
+    this.callsCount++
     return this.result
   }
 }
@@ -16,6 +18,7 @@ describe('FacebookAuthenticationService', () => {
     const sut = new FacebookAuthenticationService(loadFacebookUserByTokenApi)
     await sut.perfom({ token: 'any_token' })
     expect(loadFacebookUserByTokenApi.token).toBe('any_token')
+    expect(loadFacebookUserByTokenApi.callsCount).toBe(1)
   })
 
   it('should return authentication error when LoadFacebookApi returns undefined', async () => {
