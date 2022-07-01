@@ -39,7 +39,6 @@ describe('FacebookAuthenticationService', () => {
 
   it('should call LoadUserAccountRepo with correct values when LoadFacebookApi return data', async () => {
     await sut.perfom({ token })
-    await loadUserAccountRepo.load({ email })
     expect(loadUserAccountRepo.load).toHaveBeenCalledWith({ email })
     expect(loadUserAccountRepo.load).toHaveBeenCalledTimes(1)
   })
