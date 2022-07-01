@@ -15,7 +15,7 @@ export interface LoadUserAccountRepository {
 export namespace SaveFacebookAccountRepository {
   export type Params = {
     id?: string
-    name: string
+    name?: string
     email?: string
     facebookId: string
   }
