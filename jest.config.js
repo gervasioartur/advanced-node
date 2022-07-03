@@ -1,7 +1,12 @@
 module.exports = {
   coverageProvider: 'babel',
   coverageDirectory: 'coverage',
-  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.ts',
+    '!<rootDir>/src/main/**',
+    '!<rootDir>/src/**/index.ts'
+
+  ],
   moduleNameMapper: {
     '@/__tests__/(.+)': '<rootDir>/__tests__/$1',
     '@/(.+)': '<rootDir>/src/$1'
