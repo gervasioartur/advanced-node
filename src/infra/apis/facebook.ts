@@ -10,12 +10,20 @@ export class FacebookApi {
   ) {}
 
   async loadUser (params: LoadFacebookUserApi.Params): Promise<void> {
-    await this.httpclient.get({
+    const appToekn = await this.httpclient.get({
       url: `${this.baseUrl}/oauth/access_token`,
       params: {
         client_id: this.clientId,
         client_secret: this.clientSecret,
         grant_type: 'client_credentials'
+      }
+    })
+
+    await this.httpclient.get({
+      url: `${this.baseUrl}/debug_token`,
+      params: {
+        access_token: appToekn.access_token,
+        input_token: params.token
       }
     })
   }

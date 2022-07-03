@@ -3,8 +3,9 @@ export namespace HttpGetClient {
     url: string
     params: object
   }
+  export type Result = any
 }
 
 export interface HttpGetClient {
-  get: (params: HttpGetClient.Params) => any
+  get: (params: HttpGetClient.Params) => HttpGetClient.Result
 }
