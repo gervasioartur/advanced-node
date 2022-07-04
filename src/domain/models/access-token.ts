@@ -1,6 +1,6 @@
 export class AccessToken {
   constructor (
-    private readonly value: string
+    readonly value: string
 
   ) {}
 
