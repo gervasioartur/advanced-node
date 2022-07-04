@@ -3,7 +3,7 @@ import { FacebookAuthentication } from '@/domain/features'
 import { AccessToken } from '@/domain/models'
 import { mock, MockProxy } from 'jest-mock-extended'
 import { FacebookLoginController } from '@/application/controller'
-import { SeverError } from '@/application/errors'
+import { RequiresField, SeverError } from '@/application/errors'
 
 describe('FacebookLoginController', () => {
   let sut: FacebookLoginController
@@ -22,7 +22,7 @@ describe('FacebookLoginController', () => {
     const httResponse = await sut.handle({ token: '' })
     expect(httResponse).toEqual({
       statusCode: 400,
-      data: new Error('The field token is required')
+      data: new RequiresField('token')
     })
   })
 
@@ -30,7 +30,7 @@ describe('FacebookLoginController', () => {
     const httResponse = await sut.handle({ token: null })
     expect(httResponse).toEqual({
       statusCode: 400,
-      data: new Error('The field token is required')
+      data: new RequiresField('token')
     })
   })
 
@@ -38,7 +38,7 @@ describe('FacebookLoginController', () => {
     const httResponse = await sut.handle({ token: undefined })
     expect(httResponse).toEqual({
       statusCode: 400,
-      data: new Error('The field token is required')
+      data: new RequiresField('token')
     })
   })
 
