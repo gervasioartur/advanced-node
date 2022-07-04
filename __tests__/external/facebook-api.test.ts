@@ -24,7 +24,7 @@ describe('facebook Api Integration Tests', () => {
   })
 
   it('should return undefined if token is invalid', async () => {
-    const fbUser = await sut.loadUser({ token: 'invali_token' })
+    const fbUser = await sut.loadUser({ token: 'invalid_token' })
     expect(fbUser).toBeUndefined()
   })
 })
