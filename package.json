@@ -16,6 +16,7 @@
     "test:watch": "yarn test -- ----watchAll",
     "test:staged": "yarn test -- --bail --findRelatedTests ./src",
     "test:coverage": "yarn test -- --coverage",
+    "test:fb-api": "yarn test -- -c ./jest.integration.config.js ./__tests__/external/facebook-api.test.ts",
     "prepare": "husky install"
   },
   "devDependencies": {
