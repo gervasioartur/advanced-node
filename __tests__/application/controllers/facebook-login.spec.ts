@@ -3,11 +3,8 @@ import { FacebookAuthentication } from '@/domain/features'
 import { AccessToken } from '@/domain/models'
 import { mock, MockProxy } from 'jest-mock-extended'
 import { FacebookLoginController } from '@/application/controller'
-import { SeverError, UnauthorizedError } from '@/application/errors'
-import { mocked } from 'jest-mock'
-import { RequiredStringValidator, ValidationComposite } from '@/application/validation'
-
-jest.mock('@/application/validation/composite')
+import { UnauthorizedError } from '@/application/errors'
+import { RequiredStringValidator } from '@/application/validation'
 
 describe('FacebookLoginController', () => {
   let token: string
@@ -24,20 +21,11 @@ describe('FacebookLoginController', () => {
     sut = new FacebookLoginController(facebookAuth)
   })
 
-  it('should return  400 validation fails', async () => {
-    const error = new Error('validation_error')
-    const ValidationCompositeSpy = jest.fn().mockImplementationOnce(() => ({
-      validate: jest.fn().mockReturnValueOnce(error)
-    }))
-    mocked(ValidationComposite).mockImplementationOnce(ValidationCompositeSpy)
-    const httResponse = await sut.handle({ token })
-    expect(ValidationComposite).toHaveBeenCalledWith([
+  it('should build  validator correcty', async () => {
+    const validators = sut.buildValidators({ token })
+    expect(validators).toEqual([
       new RequiredStringValidator('any_token', 'token')
     ])
-    expect(httResponse).toEqual({
-      statusCode: 400,
-      data: error
-    })
   })
 
   it('should call FacebookAthentication with correct params', async () => {
@@ -62,16 +50,6 @@ describe('FacebookLoginController', () => {
       data: {
         accessToken: 'any_value'
       }
-    })
-  })
-
-  it('should return  500 if authentication throws', async () => {
-    const error = new Error('infra_Error')
-    facebookAuth.perform.mockRejectedValueOnce(error)
-    const httResponse = await sut.handle({ token })
-    expect(httResponse).toEqual({
-      statusCode: 500,
-      data: new SeverError(error)
     })
   })
 })
