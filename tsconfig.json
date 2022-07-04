@@ -3,7 +3,7 @@
     "strict": true,
     "outDir": "dist",
     "baseUrl": "src",
-    "rootDir": "src",
+    "rootDirs": ["src", "__tests__"],
     "target": "es2021",
     "sourceMap": true,
     "module": "commonjs",
@@ -14,17 +14,9 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@/*": [
-        "*"
-      ],
-      "@/__tests__/*": [
-        "../tests/*"
-      ]
+      "@/*": [ "*" ],
+      "@/__tests__/*": [ "../__tests__/*" ],
     },
   },
-  "include": [
-    "src",
-    "__tests__",
-    "__tests__"
-  ]
+  "include": ["src",  "__tests__"]
 }

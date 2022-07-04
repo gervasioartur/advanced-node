@@ -11,6 +11,7 @@ module.exports = {
     '@/__tests__/(.+)': '<rootDir>/__tests__/$1',
     '@/(.+)': '<rootDir>/src/$1'
   },
+  testMatch: ['**/*.spec.ts'],
   roots: [
     '<rootDir>/src/',
     '<rootDir>/__tests__/'
