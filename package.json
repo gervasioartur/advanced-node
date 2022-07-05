@@ -17,6 +17,9 @@
     "test:staged": "yarn test -- --bail --findRelatedTests ./src",
     "test:coverage": "yarn test -- --coverage",
     "test:fb-api": "yarn test -- -c ./jest.integration.config.js ./__tests__/external/facebook-api.test.ts --watchAll",
+    "up": "yarn build && sudo docker-compose up",
+    "down": "sudo docker-compose down",
+    "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9221 --nolazy ./dist/main/server.js",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -41,10 +44,11 @@
     "jest-mock-extended": "^2.0.6",
     "lint-staged": "^13.0.3",
     "module-alias": "^2.2.2",
+    "nodemon": "^2.0.18",
     "pg-mem": "^1.9.17",
     "supertest": "^6.2.4",
     "ts-jest": "^28.0.5",
-    "typescript": "^4.5.0"
+    "typescript": "^4.4.2"
   },
   "dependencies": {
     "axios": "^0.27.2",

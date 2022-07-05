@@ -1,17 +1,17 @@
 
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
-@Entity({ name: 'usuarios' })
-export class PgUser {
+@Entity({ name: 'users' })
+export class User {
   @PrimaryGeneratedColumn()
   id!: number
 
-  @Column({ name: 'nome', nullable: true })
+  @Column({ nullable: true })
   name?: string
 
   @Column()
   email!: string
 
-  @Column({ name: '-id_facebook', nullable: true })
+  @Column({ nullable: true })
   facebookId?: string
 }
