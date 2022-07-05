@@ -4,8 +4,8 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/main/**',
-    '!<rootDir>/src/**/index.ts'
-
+    '!<rootDir>/src/**/index.ts',
+    '!<rootDir>/src/infra/postgres/helpers/config.ts'
   ],
   moduleNameMapper: {
     '@/__tests__/(.+)': '<rootDir>/__tests__/$1',
