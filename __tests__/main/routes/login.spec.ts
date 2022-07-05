@@ -3,6 +3,7 @@ import { app } from '@/main/config/app'
 import { IBackup } from 'pg-mem'
 import { makeFakeDb } from '@/__tests__/infra/postgres/mocks'
 import { getConnection } from 'typeorm'
+import { UnauthorizedError } from '@/application/errors'
 
 describe('LoginRoutes', () => {
   describe('POST /login/facebook', () => {
@@ -35,10 +36,19 @@ describe('LoginRoutes', () => {
         name: 'any_name',
         email: 'any_email'
       })
-      await request(app)
+      const { status, body } = await request(app)
         .post('/api/login/facebook')
         .send({ token: 'valid_token' })
-        .expect(200)
+      expect(status).toBe(200)
+      expect(body.accessToken).toBeDefined()
+    })
+
+    it('should return 401 with unauthorized error', async () => {
+      const { status, body } = await request(app)
+        .post('/api/login/facebook')
+        .send({ token: 'invalid_token' })
+      expect(status).toBe(401)
+      expect(body.error).toBe(new UnauthorizedError().message)
     })
   })
 })
