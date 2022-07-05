@@ -1,8 +1,8 @@
 import { Controller } from '@/application/controller'
 import { SeverError } from '@/application/errors'
-import { mocked } from 'jest-mock'
-import { ValidationComposite } from '@/application/validation'
 import { HttpResponse } from '@/application/helpers'
+import { ValidationComposite } from '@/application/validation'
+import { mocked } from 'jest-mock'
 
 jest.mock('@/application/validation/composite')
 class ControllerStub extends Controller {

@@ -1,5 +1,5 @@
-import { AccessToken } from '@/domain/models'
 import { AuthenticationError } from '@/domain/errors/authenticatio-error'
+import { AccessToken } from '@/domain/models'
 
 export namespace FacebookAuthentication {
   export type Params = {
