@@ -1,6 +1,6 @@
 import { FacebookLoginController } from '@/application/controller'
-import { makeFacebookAuthenticationService } from '@/main/factories/services'
+import { makeFacebookAuthentication } from '@/main/factories/use-cases'
 
 export const makeFacebookLoginController = (): FacebookLoginController => {
-  return new FacebookLoginController(makeFacebookAuthenticationService())
+  return new FacebookLoginController(makeFacebookAuthentication())
 }
