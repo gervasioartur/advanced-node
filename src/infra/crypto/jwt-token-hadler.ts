@@ -1,6 +1,6 @@
 import { TokenGenerator, TokenValidator } from '@/domain/contracts/crypto'
 import { JwtPayload, sign, verify } from 'jsonwebtoken'
-export class JwtTokenHandler implements TokenGenerator {
+export class JwtTokenHandler implements TokenGenerator, TokenValidator {
   constructor (
     private readonly secret: string
   ) { }
