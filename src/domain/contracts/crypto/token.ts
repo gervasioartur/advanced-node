@@ -1,21 +1,21 @@
 export namespace TokenGenerator {
-  export type Params = {
+  export type Input = {
     key: string
     expirationInMs: number
   }
 
-  export type Result = string
+  export type Output = string
 }
 
 export interface TokenGenerator {
-  generateToken: (params: TokenGenerator.Params) => Promise<TokenGenerator.Result>
+  generateToken: (params: TokenGenerator.Input) => Promise<TokenGenerator.Output>
 }
 
 export namespace TokenValidator {
-  export type Params = { token: string }
-  export type Result = string
+  export type Input = { token: string }
+  export type Output = string
 }
 
 export interface TokenValidator {
-  validateToken: (params: TokenValidator.Params) => Promise<TokenValidator.Result>
+  validateToken: (params: TokenValidator.Input) => Promise<TokenValidator.Output>
 }

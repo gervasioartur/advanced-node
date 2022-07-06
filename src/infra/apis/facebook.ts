@@ -17,9 +17,8 @@ type UserInfo = {
   email: string
 }
 
-type Params = LoadFacebookUserApi.Params
-type Result = LoadFacebookUserApi.Result
-
+type Params = LoadFacebookUserApi.Input
+type Result = LoadFacebookUserApi.Output
 export class FacebookApi implements LoadFacebookUserApi {
   private readonly baseUrl = 'https://graph.facebook.com'
   constructor (
