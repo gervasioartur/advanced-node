@@ -4,8 +4,10 @@ import { LoadUserAccountRepository, SaveFacebookAccountRepository } from '@/doma
 import { AccessToken, FacebookAccount } from '@/domain/entities'
 import { AuthenticationError } from '@/domain/entities/errors'
 
+type Input = { token: string }
+type Output = { accessToken: string }
 type Setup = (facebookApi: LoadFacebookUserApi, userAccountRepo: LoadUserAccountRepository & SaveFacebookAccountRepository, crypto: TokenGenerator) => FacebookAthentication
-export type FacebookAthentication = (params: { token: string }) => Promise<{ accessToken: string }>
+export type FacebookAthentication = (params: Input) => Promise<Output>
 
 export const setupFacebookAuthentication: Setup = (facebookApi, userAccountRepo, crypto) => async params => {
   const fbData = await facebookApi.loadUser(params)
