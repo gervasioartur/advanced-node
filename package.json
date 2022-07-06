@@ -17,8 +17,6 @@
     "test:staged": "yarn test -- --bail --findRelatedTests ./src",
     "test:coverage": "yarn test -- --coverage",
     "test:fb-api": "yarn test -- -c ./jest.integration.config.js ./__tests__/external/facebook-api.test.ts --watchAll",
-    "up": "yarn build && sudo docker-compose up",
-    "down": "sudo docker-compose down",
     "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9221 --nolazy ./dist/main/server.js",
     "prepare": "husky install"
   },
