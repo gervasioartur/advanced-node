@@ -16,7 +16,7 @@ describe('AuthenticationMiddleware', () => {
   })
 
   it('should return 403 if authorization is empty', async () => {
-    const httpResponse = await sut.handle({ authorization: '' })
+    const httpResponse = await sut.handler({ authorization: '' })
     expect(httpResponse).toEqual({
       statusCode: 403,
       data: new ForbiddenError()
@@ -24,7 +24,7 @@ describe('AuthenticationMiddleware', () => {
   })
 
   it('should return 403 if authorization is null', async () => {
-    const httpResponse = await sut.handle({ authorization: null as any })
+    const httpResponse = await sut.handler({ authorization: null as any })
     expect(httpResponse).toEqual({
       statusCode: 403,
       data: new ForbiddenError()
@@ -32,7 +32,7 @@ describe('AuthenticationMiddleware', () => {
   })
 
   it('should return 403 if authorization is undefined', async () => {
-    const httpResponse = await sut.handle({ authorization: undefined as any })
+    const httpResponse = await sut.handler({ authorization: undefined as any })
     expect(httpResponse).toEqual({
       statusCode: 403,
       data: new ForbiddenError()
@@ -40,14 +40,14 @@ describe('AuthenticationMiddleware', () => {
   })
 
   it('should call authorize with correct input', async () => {
-    await sut.handle({ authorization })
+    await sut.handler({ authorization })
     expect(authorize).toHaveBeenCalledWith({ token: authorization })
     expect(authorize).toHaveBeenCalledTimes(1)
   })
 
   it('should return 403 if authorization throws', async () => {
     authorize.mockRejectedValueOnce(new Error('anny_error'))
-    const httpResponse = await sut.handle({ authorization })
+    const httpResponse = await sut.handler({ authorization })
     expect(httpResponse).toEqual({
       statusCode: 403,
       data: new ForbiddenError()
@@ -55,7 +55,7 @@ describe('AuthenticationMiddleware', () => {
   })
 
   it('should return 200 with user id on success', async () => {
-    const httpResponse = await sut.handle({ authorization })
+    const httpResponse = await sut.handler({ authorization })
     expect(httpResponse).toEqual({ statusCode: 200, data: { userId: 'any_userId' } })
   })
 })
