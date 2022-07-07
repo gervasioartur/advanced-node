@@ -1,6 +1,6 @@
 {
   "name": "advanced-node",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "main": "index.js",
   "author": "gervasioartur <gervasioartur@outlook.com.br>",
   "license": "MIT",
@@ -8,7 +8,7 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "node dist/main/server.js",
+    "start": "node -r dotenv/config dist/main/server.js",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "lint": "eslint .",
     "lint:fix": "yarn lint -- --fix",
@@ -18,6 +18,7 @@
     "test:coverage": "yarn test -- --coverage",
     "test:fb-api": "yarn test -- -c ./jest.integration.config.js ./__tests__/external/facebook-api.test.ts --watchAll",
     "debug": "nodemon -L --watch ./dist --inspect=0.0.0.0:9221 --nolazy ./dist/main/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only -r dotenv/config  --inspect=0.0.0.0:9221 src/main/server.ts",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -46,6 +47,7 @@
     "pg-mem": "^1.9.17",
     "supertest": "^6.2.4",
     "ts-jest": "^28.0.5",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^4.4.2"
   },
   "dependencies": {

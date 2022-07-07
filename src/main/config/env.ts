@@ -1,5 +1,5 @@
 export const env = {
-  port: process.env.PORT ?? 4500,
+  port: process.env.PORT ?? 8000,
   secretkey: process.env.SECRET ?? '!@Ian^vv$%.',
   facebookApi: {
     clientId: process.env.FACEBOOK_CLIENT_ID ?? '378192867548072',

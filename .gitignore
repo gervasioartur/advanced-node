@@ -1,5 +1,4 @@
 dist
-.vscode
 coverage
 yarn.lock
 node_modules
