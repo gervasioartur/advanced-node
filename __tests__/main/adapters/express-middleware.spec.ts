@@ -1,4 +1,4 @@
-import { HttpRequest } from '@/application/middlewares'
+import { HttpRequest } from '@/application/helpers'
 import { getMockReq, getMockRes } from '@jest-mock/express'
 import { NextFunction, Request, RequestHandler, Response } from 'express'
 import { mock, MockProxy } from 'jest-mock-extended'
@@ -9,7 +9,8 @@ export interface Middleware {
   handler: (httpRequest: any) => Promise<HttpRequest>
 }
 export const adaptExpressMidleware: Adapter = middleware => async (req, res, next) => {
-  await middleware.handler({ ...req.headers })
+  const { statusCode, data } = await middleware.handler({ ...req.headers })
+  res.status(statusCode).json(data)
 }
 
 describe('ExpressMiddleware', () => {
@@ -24,6 +25,10 @@ describe('ExpressMiddleware', () => {
     res = getMockRes().res
     next = getMockRes().next
     middleware = mock<Middleware>()
+    middleware.handler.mockResolvedValue({
+      statusCode: 500,
+      data: { error: 'any_error' }
+    })
   })
 
   beforeEach(() => {
@@ -41,5 +46,13 @@ describe('ExpressMiddleware', () => {
     await sut(req, res, next)
     expect(middleware.handler).toHaveBeenCalledWith({})
     expect(middleware.handler).toHaveBeenCalledTimes(1)
+  })
+
+  it('should respond with correct error and statusCode', async () => {
+    await sut(req, res, next)
+    expect(res.status).toHaveBeenCalledWith(500)
+    expect(res.status).toHaveBeenCalledTimes(1)
+    expect(res.json).toHaveBeenCalledWith({ error: 'any_error' })
+    expect(res.json).toHaveBeenCalledTimes(1)
   })
 })
